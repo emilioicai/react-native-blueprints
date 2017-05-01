@@ -32,11 +32,12 @@ export default class AddProduct extends React.Component {
   }
 
   async componentWillMount() {
-    const savedProducts = (await AsyncStorage.getItem('@allProducts')) || [
-    ];
-    this.setState({
-      allProducts: JSON.parse(savedProducts)
-    });
+    const savedProducts = await AsyncStorage.getItem('@allProducts');
+    if(savedProducts) {
+      this.setState({
+        allProducts: JSON.parse(savedProducts)
+      });  
+    }
 
     this.setState({
       productsInList: this.props.navigation.state.params.productsInList
