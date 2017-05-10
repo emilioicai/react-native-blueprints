@@ -3,3 +3,4 @@ android/build
 ios/build
 __tests__
 yarn.lock
+.DS_Store

@@ -13,13 +13,6 @@ import {
   Icon
 } from 'native-base';
 
-const styles = {
-  content: {
-    marginVertical: 10,
-    marginHorizontal: 8
-  }
-};
-
 export default class ShoppingList extends React.Component {
   static navigationOptions = {
     title: 'My Groceries List'
