@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationActions } from 'react-navigation';
 import { Container, Content, List, ListItem, Text, Icon, Button } from 'native-base';
 import { observer } from 'mobx-react/native';
 import { selectFeed, removeFeed } from '../actions';
@@ -17,11 +16,7 @@ export default class FeedsList extends React.Component {
 
   _handleFeedPress(feed) {
     selectFeed(feed);
-    this.props.navigation.navigate('FeedDetail', 
-      { 
-        removeFeed: () => { removeFeed(feed.url); }
-      }
-    );
+    this.props.navigation.navigate('FeedDetail', { feedUrl: feed.url });
   }
 
   render() {
