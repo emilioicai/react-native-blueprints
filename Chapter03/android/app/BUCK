@@ -45,12 +45,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.imageshare",
+    package = "com.carbooking",
 )
 
 android_resource(
     name = "res",
-    package = "com.imageshare",
+    package = "com.carbooking",
     res = "src/main/res",
 )
 
