@@ -29,6 +29,12 @@ export default class Main extends React.Component {
 				longitude: -122.4348
 			}]
     };
+    this.initialRegion = {
+      latitude: 37.78825,
+      longitude: -122.4324,
+      latitudeDelta: 0.00922,
+      longitudeDelta: 0.00421
+    };
   }
 
 	_onRegionChange(region) {
@@ -39,7 +45,6 @@ export default class Main extends React.Component {
 	  	try {
 	  		const res = await GeoCoder.geocodePosition({ lat: region.latitude, lng: region.longitude});
 	  		self.setState({ position: res[0] });
-	  		console.log(res[0])
 	  	} catch (err) {
 	  		console.log(err)
 	  	}
@@ -52,17 +57,16 @@ export default class Main extends React.Component {
 		});
 	}
 
+  componentDidMount() {
+    this._onRegionChange.call(this, this.initialRegion)
+  }
+
 	render() {
 		return (
 			<View style={{flex: 1}}>
 				<MapView
 					style={styles.fullScreenMap}
-					initialRegion={{
-						latitude: 37.78825,
-						longitude: -122.4324,
-						latitudeDelta: 0.00922,
-						longitudeDelta: 0.00421
-					}}
+					initialRegion={this.initialRegion}
 					onRegionChange={this._onRegionChange.bind(this)}
 				>
 					{this.state.carLocations.map((carLocation, i) => (
@@ -74,7 +78,7 @@ export default class Main extends React.Component {
 				    </MapView.Marker>
 				  ))}
 				</MapView>
-				<LocationSearch value={this.state.position && this.state.position.feature}/>
+				<LocationSearch value={this.state.position && (this.state.position.feature || this.state.position.formattedAddress)}/>
 				<LocationPin onPress={this._onBookingRequest.bind(this)}/>
 				<ClassSelection/>
 				<ConfirmationModal visible={this.state.confirmationModalVisible} onClose={()=>{this.setState({confirmationModalVisible: false})}}/>
@@ -92,7 +96,5 @@ const styles = StyleSheet.create({
     right: 0
   },
   car: {
-    resizeMode: 'contain',
-    height: 20
   },
 });
