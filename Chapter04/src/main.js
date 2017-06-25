@@ -1,23 +1,38 @@
 import React from 'react';
-import { TabNavigator } from 'react-navigation';
+import { DrawerNavigator,TabNavigator } from 'react-navigation';
+import { Platform } from 'react-native';
 
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import productsReducer from './reducers/products';
+import imagesReducer from './reducers/images';
 
-import ProductsList from './screens/ProductsList.js';
-import ProductDetail from './screens/ProductDetail.js';
-import Search from './screens/Search.js';
-import MyCart from './screens/MyCart.js';
+import ImagesList from './screens/ImagesList.js';
+import MyImages from './screens/MyImages.js';
+import Camera from './screens/Camera.js';
 
-const Navigator = TabNavigator({
-  ProductsList: { screen: ProductsList },
-  Search: { screen: Search },
-  MyCart: { screen: MyCart }
-});
+let Navigator;
+if(Platform.OS === 'ios'){
+  Navigator = TabNavigator({
+    ImagesList: { screen: ImagesList },
+    MyImages: { screen: MyImages },
+    Camera: { screen: Camera }
+  }, {
+    tabBarOptions: {
+      inactiveTintColor: '#aaa',
+      activeTintColor: '#000',
+      showLabel: false
+    }
+  });
+} else {
+  Navigator = DrawerNavigator({
+    ImagesList: { screen: ImagesList },
+    MyImages: { screen: MyImages },
+    Camera: { screen: Camera }
+  });
+}
 
-let store = createStore(combineReducers({ productsReducer }), applyMiddleware(thunk));
+let store = createStore(combineReducers({ imagesReducer }), applyMiddleware(thunk));
 
 export default class App extends React.Component {
   constructor() {

@@ -1,14 +1,52 @@
-export const FETCH_PRODUCTS = 'FETCH_PRODUCTS';
-export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS';
-export const FETCH_PRODUCTS_ERROR = 'FETCH_PRODUCTS_ERROR';
-export function fetchProducts() {
+import api from '../api';
+
+export function fetchImages(userId = null) {
+  let actionName, actionNameSuccess, actionNameError;
+  if(userId) {
+    actionName = 'FETCH_USER_IMAGES';
+    actionNameSuccess = 'FETCH_USER_IMAGES_SUCCESS';
+    actionNameError = 'FETCH_USER_IMAGES_ERROR';
+  } else {
+    actionName = 'FETCH_IMAGES';
+    actionNameSuccess = 'FETCH_IMAGES_SUCCESS';
+    actionNameError = 'ADD_IMAGE_ERROR';
+  }
+
   return dispatch => {
-    dispatch({ type: FETCH_PRODUCTS });
-    setTimeout(() => {
-      dispatch({ 
-        type: FETCH_PRODUCTS_SUCCESS,
-        products: [{id: 1, price: 28, name: 'Test prod 1', image: 'http://abc.com/logo.png'}]
+    dispatch({ type: actionName });
+    api
+      .fetchImages(userId)
+      .then(images => {
+        dispatch({ 
+          type: actionNameSuccess,
+          images
+        })  
+      })
+      .catch(error => {
+        dispatch({ 
+          type: actionNameError,
+          error
+        });  
       });
-    }, 1000);
+  };
+}
+
+export function addImage(data = null) {
+  return dispatch => {
+    dispatch({ type: 'ADD_IMAGE' });
+    api
+      .addImage()
+      .then(imageSrc => {
+        dispatch({ 
+          type: 'ADD_IMAGE_SUCCESS',
+          imageSrc
+        });  
+      })
+      .catch(error => {
+        dispatch({ 
+          type: 'ADD_IMAGE_ERROR',
+          error
+        });  
+      });
   };
 }
