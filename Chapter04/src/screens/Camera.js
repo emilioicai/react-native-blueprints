@@ -28,12 +28,12 @@ class CameraScreen extends Component {
           }}
           style={styles.preview}
           aspect={Camera.constants.Aspect.fill}>
-          <Button onPress={this.takePicture.bind(this)} style={{flex: 0, backgroundColor: 'transparent', alignSelf: 'center'}}>
-            <Icon name='camera' style={{fontSize: 70}}/>
+          <Button onPress={this.takePicture.bind(this)} style={{flex: 0, alignSelf: 'center'}} transparent>
+            <Icon name='camera' style={{fontSize: 70, color: 'white'}}/>
           </Button>
         </Camera>
-        <Button onPress={() => this.props.navigation.navigate('ImagesList')} style={{position: 'absolute', top:20, backgroundColor: 'transparent'}}>
-          <Icon ios='ios-arrow-dropleft' android='md-arrow-dropleft' style={{fontSize: 30}}/>
+        <Button onPress={() => this.props.navigation.navigate('ImagesList')} style={{position: 'absolute', top:20}} transparent>
+          <Icon ios='ios-arrow-dropleft' android='md-arrow-dropleft' style={{fontSize: 30, color: 'white'}}/>
         </Button>
       </View>
     );

@@ -22,7 +22,7 @@ export default class Gallery extends React.Component {
                     <Text style={{fontWeight: 'bold'}}>{image.user.name}</Text>
                   </View>
                   <Image source={{uri: image.src}} style={{width: width, height: 300, resizeMode: 'cover'}}/>
-                  <Button style={{position: 'absolute', right: 15, top: 25, backgroundColor: 'transparent'}} onPress={this._share.bind(this, image)}>
+                  <Button style={{position: 'absolute', right: 15, top: 25}} transparent onPress={this._share.bind(this, image)}>
                     <Icon name='ios-more' style={{fontSize: 20, color: 'black'}}/>
                   </Button>
                 </ListItem>
