@@ -3,7 +3,8 @@ const stringFrequencies = [
   { min: 221, max: 287, tuned: 246 },
   { min: 171, max: 221, tuned: 196 },
   { min: 128, max: 171, tuned: 146 },
-  { min: 36, max: 128, tuned: 82}
+  { min: 96, max: 128, tuned: 110 },
+  { min: 36, max: 96, tuned: 82}
 ];
 
 export function getClosestString(freq) {
@@ -16,7 +17,9 @@ export function getClosestString(freq) {
       } else {
         delta = Math.floor(delta * 100 / (stringFrequencies[i].tuned - stringFrequencies[i].min));
       }
-      stringData = { number: i + 1, delta } //relative delta
+      if(delta > 75) delta = 75; //limit deltas
+      if(delta < -75) delta = -75;
+      stringData = { number: 6 - i, delta } //relative delta
       break;
     }
   }
