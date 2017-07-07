@@ -309,7 +309,6 @@ static void listeningCallback(void *inUserData, AudioQueueRef inAQ, AudioQueueBu
 	[[AVAudioSession sharedInstance] setActive:YES error:nil];
   [[AVAudioSession sharedInstance]
    setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
-  
 	return self;
 }
 

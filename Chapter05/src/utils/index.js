@@ -25,3 +25,9 @@ export function getClosestString(freq) {
   }
   return stringData;
 }
+
+export const colors = {
+  black: '#1f2025',
+  yellow: '#f3c556',
+  green: '#3bd78b'
+}
