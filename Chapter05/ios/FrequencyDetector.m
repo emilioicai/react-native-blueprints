@@ -1,5 +1,4 @@
 #import "FrequencyDetector.h"
-
 #import "SCListener.h"
 
 NSString *freq = @"";

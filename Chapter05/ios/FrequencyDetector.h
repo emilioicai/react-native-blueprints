@@ -1,4 +1,3 @@
-// FFTHelper.h
 #import <React/RCTBridgeModule.h>
 #import <Accelerate/Accelerate.h>
 

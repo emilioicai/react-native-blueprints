@@ -37,7 +37,6 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8513AB761F0E99DC00828360 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8513AB751F0E99DC00828360 /* AudioToolbox.framework */; };
-		8513AB8E1F0E9A5500828360 /* CHANGELOG.markdown in Sources */ = {isa = PBXBuildFile; fileRef = 8513AB871F0E9A5500828360 /* CHANGELOG.markdown */; };
 		8513AB8F1F0E9A5500828360 /* kiss_fft.c in Sources */ = {isa = PBXBuildFile; fileRef = 8513AB881F0E9A5500828360 /* kiss_fft.c */; };
 		8513AB901F0E9A5500828360 /* kiss_fftr.c in Sources */ = {isa = PBXBuildFile; fileRef = 8513AB8A1F0E9A5500828360 /* kiss_fftr.c */; };
 		8513AB911F0E9A5500828360 /* README.markdown in Sources */ = {isa = PBXBuildFile; fileRef = 8513AB8C1F0E9A5500828360 /* README.markdown */; };
@@ -279,7 +278,6 @@
 		8513AB751F0E99DC00828360 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		8513AB851F0E9A5500828360 /* SCListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCListener.h; path = SCListener/SCListener.h; sourceTree = "<group>"; };
 		8513AB861F0E9A5500828360 /* _kiss_fft_guts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _kiss_fft_guts.h; path = SCListener/_kiss_fft_guts.h; sourceTree = "<group>"; };
-		8513AB871F0E9A5500828360 /* CHANGELOG.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = CHANGELOG.markdown; path = SCListener/CHANGELOG.markdown; sourceTree = "<group>"; };
 		8513AB881F0E9A5500828360 /* kiss_fft.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fft.c; path = SCListener/kiss_fft.c; sourceTree = "<group>"; };
 		8513AB891F0E9A5500828360 /* kiss_fft.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = kiss_fft.h; path = SCListener/kiss_fft.h; sourceTree = "<group>"; };
 		8513AB8A1F0E9A5500828360 /* kiss_fftr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = kiss_fftr.c; path = SCListener/kiss_fftr.c; sourceTree = "<group>"; };
@@ -425,7 +423,6 @@
 			children = (
 				8513AB851F0E9A5500828360 /* SCListener.h */,
 				8513AB861F0E9A5500828360 /* _kiss_fft_guts.h */,
-				8513AB871F0E9A5500828360 /* CHANGELOG.markdown */,
 				8513AB881F0E9A5500828360 /* kiss_fft.c */,
 				8513AB891F0E9A5500828360 /* kiss_fft.h */,
 				8513AB8A1F0E9A5500828360 /* kiss_fftr.c */,
@@ -981,7 +978,6 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
-				8513AB8E1F0E9A5500828360 /* CHANGELOG.markdown in Sources */,
 				8563D97C1F0B85FF00378704 /* FrequencyDetector.m in Sources */,
 				8513AB8F1F0E9A5500828360 /* kiss_fft.c in Sources */,
 				8513AB921F0E9A5500828360 /* SCListener.m in Sources */,

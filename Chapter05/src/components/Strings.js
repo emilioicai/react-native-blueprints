@@ -6,7 +6,7 @@ import {
   Text
 } from 'react-native';
 
-import { getClosestString, colors } from '../utils/';
+import { colors } from '../utils/';
 
 const stringNotes = ['E','A','D','G','B','E'];
 
