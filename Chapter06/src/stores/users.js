@@ -48,6 +48,9 @@ class Users {
 		firebase.auth().createUserWithEmailAndPassword(email, password)
 		.then((user) => {
 			this.registering = false;
+			notifications.init((notificationsToken) => {
+				this.setNotificationsToken(notificationsToken);
+			});
 			firebaseApp.database().ref('/users/' + user.uid).set({
 				name: name
 			});
