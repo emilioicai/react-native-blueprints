@@ -119,10 +119,15 @@ class Login extends React.Component {
             secureTextEntry={true}
             placeholder='password'
           />
-          <Button
-            onPress={this.onPressRegister.bind(this)}
-            title='Register'
-          />
+          {
+            this.props.users.registering ?
+            <ActivityIndicator/>
+            :
+            <Button
+              onPress={this.onPressRegister.bind(this)}
+              title='Register'
+            />
+          }
         </View>
       </KeyboardAwareScrollView>
     )
