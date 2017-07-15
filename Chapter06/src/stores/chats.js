@@ -26,7 +26,10 @@ class Chats {
       if(message.user.avatar) formattedMessage.user.avatar = message.user.avatar;
       if(message.image) formattedMessage.image = message.image;
 
+      //add the message to the user's feed
       firebaseApp.database().ref('/messages/' + chatId).push().set(formattedMessage);
+      //add the message to the other user's feed
+      firebaseApp.database().ref('/messages/' + message.user._id).push().set(formattedMessage);
 
       //notify person on the chat room
       firebaseApp.database().ref('/users/' + chatId).once('value').then(function(snapshot) {
