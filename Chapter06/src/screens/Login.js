@@ -50,7 +50,7 @@ class Login extends React.Component {
             autoCorrect={false}
             keyboardType='email-address'
             returnKeyType='next'
-            style={{borderColor: 'gray', borderBottomWidth: 1, height: 40}}
+            style={{height: 40}}
             onChangeText={(loginEmail) => this.setState({loginEmail})}
             value={this.state.loginEmail}
             placeholder='email'
@@ -92,7 +92,7 @@ class Login extends React.Component {
             autoCorrect={false}
             keyboardType='email-address'
             returnKeyType='next'
-            style={{borderColor: 'gray', borderBottomWidth: 1, height: 40}}
+            style={{height: 40}}
             onChangeText={(registerEmail) => this.setState({registerEmail})}
             value={this.state.registerEmail}
             placeholder='email'
@@ -102,7 +102,7 @@ class Login extends React.Component {
           />
           <TextInput
             ref='registerName'
-            style={{borderColor: 'gray', borderBottomWidth: 1, height: 40}}
+            style={{height: 40}}
             onChangeText={(registerName) => this.setState({registerName})}
             returnKeyType='next'
             value={this.state.registerName}

@@ -4,7 +4,7 @@ import FCM, {FCMEvent, RemoteNotificationResult, WillPresentNotificationResult, 
 let notificationListener = null;
 let refreshTokenListener = null;
 const API_URL = 'https://fcm.googleapis.com/fcm/send';
-const FirebaseServerKey = 'AAAAng5g36I:APA91bEpLmlWV_XfXciOa612mZ_nXLdDgPHTrVSXQnaWlweOeTSCRc-SFB3h4H9VmaIBcPEYOSkW_lo8tu2ju678tQcDLTezDxJE9DXRRUB-nLt7uYWam0MOfuOGtPi3xJN_0w5BgQNI';
+const FirebaseServerKey = '<Your Firebase Server Key>';
 
 const init = (cb) => {
   FCM.requestPermissions();
