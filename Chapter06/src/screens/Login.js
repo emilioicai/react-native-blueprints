@@ -17,14 +17,6 @@ import RegistrationForm from '../components/RegistrationForm'
 
 @inject('users') @observer
 class Login extends React.Component {
-  state= {
-    loginEmail: '',
-    loginPassword: '',
-    registerEmail: '',
-    registerPassword: '',
-    registerName: ''
-  }
-
   onLogin(email, password) {
     this.props.users.login(email, password);
   }
