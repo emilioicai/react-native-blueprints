@@ -12,6 +12,9 @@ import { observer, inject } from 'mobx-react/native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
+import LoginForm from '../components/LoginForm'
+import RegistrationForm from '../components/RegistrationForm'
+
 @inject('users') @observer
 class Login extends React.Component {
   state= {
@@ -22,12 +25,12 @@ class Login extends React.Component {
     registerName: ''
   }
 
-  onPressLogin() {
-    this.props.users.login(this.state.loginEmail, this.state.loginPassword);
+  onLogin(email, password) {
+    this.props.users.login(email, password);
   }
 
-  onPressRegister() {
-    this.props.users.register(this.state.registerEmail, this.state.registerPassword, this.state.registerName);
+  onPressRegister(email, password, name) {
+    this.props.users.register(email, password, name);
   }
 
   render() {
@@ -37,98 +40,19 @@ class Login extends React.Component {
         <View style={{alignItems: 'center', marginBottom: 20}}>
           <Text>- please, login to continue -</Text>
         </View>
-        {/*** Login form ***/}
-        <View style={{backgroundColor: 'white', padding: 15, borderRadius: 10}}>
-          {
-            this.props.users.loggingError &&
-            <View style={{backgroundColor: '#fcc', borderRadius: 5, alignItems: 'center', marginBottom: 10}}>
-              <Text>{this.props.users.loggingError}</Text>
-            </View>
-          }
-          <TextInput
-            autoCapitalize='none'
-            autoCorrect={false}
-            keyboardType='email-address'
-            returnKeyType='next'
-            style={{height: 40}}
-            onChangeText={(loginEmail) => this.setState({loginEmail})}
-            value={this.state.loginEmail}
-            placeholder='email'
-            onSubmitEditing={(event) => {
-              this.refs.loginPassword.focus();
-            }}
-          />
-          <TextInput
-            ref='loginPassword'
-            style={{height: 40}}
-            onChangeText={(loginPassword) => this.setState({loginPassword})}
-            value={this.state.loginPassword}
-            secureTextEntry={true}
-            placeholder='password'
-          />
-          {
-            this.props.users.loggingIn ?
-            <ActivityIndicator/>
-            :
-            <Button
-              onPress={this.onPressLogin.bind(this)}
-              title='Login'
-            />
-          }
-        </View>
+        <LoginForm
+          onPress={this.onLogin.bind(this)}
+          busy={this.props.users.loggingIn}
+          loggingError={this.props.users.loggingError}
+        />
         <View style={{alignItems: 'center', marginTop: 20, marginBottom: 20}}>
           <Text>- or register -</Text>
         </View>
-        {/*** Registration form ***/}
-        <View style={{backgroundColor: 'white', padding: 15, borderRadius: 10}}>
-          {
-            this.props.users.registeringError &&
-            <View style={{backgroundColor: '#fcc', borderRadius: 5, alignItems: 'center', marginBottom: 10}}>
-              <Text>{this.props.users.registeringError}</Text>
-            </View>
-          }
-          <TextInput
-            autoCapitalize='none'
-            autoCorrect={false}
-            keyboardType='email-address'
-            returnKeyType='next'
-            style={{height: 40}}
-            onChangeText={(registerEmail) => this.setState({registerEmail})}
-            value={this.state.registerEmail}
-            placeholder='email'
-            onSubmitEditing={(event) => {
-              this.refs.registerName.focus();
-            }}
-          />
-          <TextInput
-            ref='registerName'
-            style={{height: 40}}
-            onChangeText={(registerName) => this.setState({registerName})}
-            returnKeyType='next'
-            value={this.state.registerName}
-            placeholder='name'
-            onSubmitEditing={(event) => {
-              this.refs.registerPassword.focus();
-            }}
-          />
-          <TextInput
-            ref='registerPassword'
-            style={{height: 40}}
-            onChangeText={(registerPassword) => this.setState({registerPassword})}
-            value={this.state.registerPassword}
-            secureTextEntry={true}
-            placeholder='password'
-          />
-          {
-            this.props.users.registering ?
-            <ActivityIndicator/>
-            :
-            <Button
-              onPress={this.onPressRegister.bind(this)}
-              title='Register'
-            />
-          }
-        </View>
+        <RegistrationForm
+          onPress={this.onPressRegister.bind(this)}
+          busy={this.props.users.registering}
+          registeringError={this.props.users.registeringError}
+        />
       </KeyboardAwareScrollView>
     )
   }
