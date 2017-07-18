@@ -6,7 +6,7 @@ import notifications from '../notifications'
 
 class Users {
 	@observable id = null;
-  @observable isLoggedIn = false;
+	@observable isLoggedIn = false;
 	@observable name = null;
 	@observable avatar = null;
 	@observable notificationsToken = null;
@@ -15,21 +15,21 @@ class Users {
 	@observable loggingError = null;
 	@observable registeringError = null;
 
-  @action login = function(username, password) {
-		this.loggingIn = true;
-		this.loggingError = null;
-    firebase.auth().signInWithEmailAndPassword(username, password)
-		.then(() => {
-			this.loggingIn = false;
-			notifications.init((notificationsToken) => {
-				this.setNotificationsToken(notificationsToken);
-			});
-		})
-		.catch((error) => {
-			this.loggingIn = false;
-			this.loggingError = error.message;
-    });
-  }
+@action login = function(username, password) {
+	this.loggingIn = true;
+	this.loggingError = null;
+	firebase.auth().signInWithEmailAndPassword(username, password)
+	.then(() => {
+		this.loggingIn = false;
+		notifications.init((notificationsToken) => {
+			this.setNotificationsToken(notificationsToken);
+		});
+	})
+	.catch((error) => {
+		this.loggingIn = false;
+		this.loggingError = error.message;
+	});
+}
 
 	@action logout = function() {
 		notifications.unbind();
@@ -40,7 +40,7 @@ class Users {
 	@action register = function(email, password, name) {
 		if(!name || name == '') {
 			this.registering = false;
-      this.registeringError = 'Name was not entered';
+			this.registeringError = 'Name was not entered';
 			return;
 		}
 		this.registering = true;
@@ -57,7 +57,7 @@ class Users {
 		})
 		.catch((error) => {
 			this.registering = false;
-      this.registeringError = error.message;
+			this.registeringError = error.message;
 		})
 	}
 
@@ -71,7 +71,8 @@ class Users {
 
 	searchUsers(name) {
 		return new Promise(function(resolve) {
-			firebaseApp.database().ref('/users/').once('value').then(function(snapshot) {
+			firebaseApp.database().ref('/users/').once('value')
+			.then(function(snapshot) {
 				let foundUsers = [];
 				const users = snapshot.val();
 				for(var id in users) {
@@ -102,7 +103,7 @@ class Users {
 			if (user) {
 				this.id = user.uid;
 				this.isLoggedIn = true;
-        this.chatsBind = chats.bindToFirebase(user.uid);
+				this.chatsBind = chats.bindToFirebase(user.uid);
 				this.userBind = firebaseApp.database().ref('/users/' + this.id).on('value', (snapshot) => {
 					const userObj = snapshot.val();
 					if(!userObj) return;
@@ -112,7 +113,7 @@ class Users {
 			} else {
 				this.id = null;
 				this.isLoggedIn = false;
-        this.userBind = null;
+				this.userBind = null;
 				this.name = null;
 				this.avatar = null;
 			}

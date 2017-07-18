@@ -60,8 +60,6 @@ const sendNotification = (token, data) => {
   	"priority": 10
   });
 
-  console.log(1,body);
-
   let headers = new Headers({
 		"Content-Type": "application/json",
 		"Content-Length": parseInt(body.length),

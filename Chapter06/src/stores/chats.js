@@ -10,7 +10,7 @@ class Chats {
   @observable downloadingChats = false;
   @observable downloadingChat = false;
 
-  @action addMessages = function(chatId, messages) {
+  @action addMessages = function(chatId, contactId, messages) {
     if(!messages || messages.length < 1) return;
 
     messages.forEach((message) => {
@@ -26,13 +26,11 @@ class Chats {
       if(message.user.avatar) formattedMessage.user.avatar = message.user.avatar;
       if(message.image) formattedMessage.image = message.image;
 
-      //add the message to the user's feed
+      //add the message to the chat
       firebaseApp.database().ref('/messages/' + chatId).push().set(formattedMessage);
-      //add the message to the other user's feed
-      firebaseApp.database().ref('/messages/' + message.user._id).push().set(formattedMessage);
 
       //notify person on the chat room
-      firebaseApp.database().ref('/users/' + chatId).once('value').then(function(snapshot) {
+      firebaseApp.database().ref('/users/' + contactId).once('value').then(function(snapshot) {
         var notificationsToken = snapshot.val().notificationsToken;
         notifications.sendNotification(notificationsToken, {
           sender: message.user.name,
@@ -70,15 +68,15 @@ class Chats {
 
   @action add(user1, user2) {
     return new Promise(function(resolve, reject) {
-      firebaseApp.database().ref('/chats/' + user1.id + '/' + user2.id).set({
+      firebaseApp.database().ref('/chats/' + user1.id + '/' + user1.id + user2.id).set({
 				name: user2.name,
         image: user2.avatar,
-        notificationsToken: user2.notificationsToken
+        contactId: user2.id
 			}).then(() => {
-        firebaseApp.database().ref('/chats/' + user2.id + '/' + user1.id).set({
+        firebaseApp.database().ref('/chats/' + user2.id + '/' + user1.id + user2.id).set({
   				name: user1.name,
           image: user1.avatar,
-          notificationsToken: user1.notificationsToken
+          contactId: user1.id
   			}).then(() => {
           resolve();
         })
@@ -96,7 +94,8 @@ class Chats {
         this.list.push({
           id,
           name: chatsObj[id].name,
-          image: chatsObj[id].image
+          image: chatsObj[id].image,
+          contactId: chatsObj[id].contactId
         });
       }
 		});

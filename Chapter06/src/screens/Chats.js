@@ -39,7 +39,8 @@ class ChatList extends React.Component {
                   onPress={() => this.props.navigation.navigate('Chat', {
                     id: item.id,
                     name: item.name,
-                    image: item.image || this.imgPlaceholder
+                    image: item.image || this.imgPlaceholder,
+                    contactId: item.contactId
                   })}
                 />
               )

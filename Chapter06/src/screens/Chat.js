@@ -17,10 +17,11 @@ class Chat extends React.Component {
   })
 
   onSend(messages) {
-    this.props.chats.addMessages(this.chatId, messages)
+    this.props.chats.addMessages(this.chatId, this.contactId, messages)
   }
 
   componentWillMount() {
+    this.contactId = this.props.navigation.state.params.contactId;
     this.chatId = this.props.navigation.state.params.id;
     this.props.chats.selectChat(this.chatId);
   }
