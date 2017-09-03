@@ -5,7 +5,7 @@ import { W, H } from "../constants";
 export default class Parrot extends React.Component {
   constructor() {
     super();
-    this.state = { rotation: 0, wings: "down" };
+    this.state = { wings: "down" };
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -22,7 +22,7 @@ export default class Parrot extends React.Component {
       parrotImage = require("../../images/parrot1.png");
     } else {
       parrotImage = require("../../images/parrot2.png");
-    }
+    } 
     return (
       <Image
         source={parrotImage}
