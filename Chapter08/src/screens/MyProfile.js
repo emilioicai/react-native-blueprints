@@ -1,23 +1,19 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Icon } from 'native-base';
 import * as ProductActions from '../reducers/products';
 
-class MyCart extends React.Component {
+class MyProfile extends React.Component {
   static navigationOptions = {
     drawerLabel: 'Home',
-    tabBarIcon: () => <Icon name="cart" />,
+    tabBarIcon: () => <Icon name="home" />,
   };
 
   render() {
-    return (
-      <View>
-        <Text>My Cart</Text>
-      </View>
-    );
+    return <View />;
   }
 }
 
@@ -30,4 +26,4 @@ function mapStateActionsToProps(dispatch) {
   return bindActionCreators(ProductActions, dispatch);
 }
 
-export default connect(mapStateToProps, mapStateActionsToProps)(MyCart);
+export default connect(mapStateToProps, mapStateActionsToProps)(MyProfile);

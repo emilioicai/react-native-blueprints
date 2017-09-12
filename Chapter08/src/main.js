@@ -1,34 +1,62 @@
 import React from 'react';
-import { TabNavigator } from 'react-navigation';
+import {
+  DrawerNavigator,
+  TabNavigator,
+  StackNavigator,
+} from 'react-navigation';
+import { Platform } from 'react-native';
 
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import appReducer from './reducers/app';
 import productsReducer from './reducers/products';
+import userReducer from './reducers/user';
 
-import ProductsList from './screens/ProductsList.js';
-import ProductDetail from './screens/ProductDetail.js';
-import Search from './screens/Search.js';
-import MyCart from './screens/MyCart.js';
+import ProductList from './screens/ProductList';
+import ProductDetail from './screens/ProductDetail';
+import MyCart from './screens/MyCart';
+import MyProfile from './screens/MyProfile';
+import Sales from './screens/Sales';
 
-const Navigator = TabNavigator({
-  ProductsList: { screen: ProductsList },
-  Search: { screen: Search },
-  MyCart: { screen: MyCart }
+const NestedNavigator = StackNavigator({
+  ProductList: { screen: ProductList },
+  ProductDetail: { screen: ProductDetail },
 });
 
-let store = createStore(combineReducers({ productsReducer }), applyMiddleware(thunk));
-
-export default class App extends React.Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
-      <Provider store={store}>
-        <Navigator/>
-      </Provider>
-    )
-  }
+let Navigator;
+if (Platform.OS === 'ios') {
+  Navigator = TabNavigator(
+    {
+      Home: { screen: NestedNavigator },
+      MyCart: { screen: MyCart },
+      MyProfile: { screen: MyProfile },
+      Sales: { screen: Sales },
+    },
+    {
+      tabBarOptions: {
+        inactiveTintColor: '#aaa',
+        activeTintColor: '#000',
+        showLabel: true,
+      },
+    },
+  );
+} else {
+  Navigator = DrawerNavigator({
+    Home: { screen: NestedNavigator },
+    MyCart: { screen: MyCart },
+    MyProfile: { screen: MyProfile },
+    Sales: { screen: Sales },
+  });
 }
+
+const store = createStore(
+  combineReducers({ appReducer, productsReducer, userReducer }),
+  applyMiddleware(thunk),
+);
+
+export default () => (
+  <Provider store={store}>
+    <Navigator />
+  </Provider>
+);
