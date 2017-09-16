@@ -14,7 +14,9 @@ class ProductDetail extends React.Component {
   };
 
   onBuyPress(product) {
-    this.props.navigation.navigate('MyCart', { product });
+    this.props.addProductToCart(product);
+    this.props.navigation.goBack();
+    setTimeout(() => this.props.navigation.navigate('MyCart', { product }), 0);
   }
 
   render() {
@@ -70,6 +72,7 @@ class ProductDetail extends React.Component {
 
 ProductDetail.propTypes = {
   navigation: PropTypes.any.isRequired,
+  addProductToCart: PropTypes.func.isRequired,
 };
 
 ProductDetail.navigationOptions = props => {
