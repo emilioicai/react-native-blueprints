@@ -4,7 +4,15 @@ import { ScrollView, View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ListItem, Thumbnail, Text, Icon, Button, Badge } from 'native-base';
+import {
+  ListItem,
+  Text,
+  Icon,
+  Button,
+  Badge,
+  Header,
+  Title,
+} from 'native-base';
 
 import * as ProductActions from '../reducers/products';
 
@@ -20,51 +28,56 @@ class MyCart extends React.Component {
 
   render() {
     return (
-      <ScrollView style={{ marginTop: 20 }}>
-        {this.props.cart.map((p, i) => (
-          <ListItem key={i} style={{ justifyContent: 'space-between' }}>
-            <Badge primary>
-              <Text>{p.quantity}</Text>
-            </Badge>
-            <Text> {p.name}</Text>
-            <Button
-              icon
-              danger
-              small
-              light
-              onPress={() => this.onTrashPress(p)}
-            >
-              <Icon name="trash" />
-            </Button>
-          </ListItem>
-        ))}
-        {this.props.cart.length > 0 && (
-          <View>
-            <Text style={{ alignSelf: 'flex-end', margin: 10 }}>
-              Total: ${this.props.cart.reduce(
-                (sum, p) => sum + p.price * p.quantity,
-                0,
-              )}
-            </Text>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+      <View>
+        <Header>
+          <Title style={{ paddingTop: 10 }}>My Cart</Title>
+        </Header>
+        <ScrollView>
+          {this.props.cart.map((p, i) => (
+            <ListItem key={i} style={{ justifyContent: 'space-between' }}>
+              <Badge primary>
+                <Text>{p.quantity}</Text>
+              </Badge>
+              <Text> {p.name}</Text>
               <Button
-                style={{ margin: 10 }}
-                onPress={() => this.props.navigation.navigate('Home')}
+                icon
+                danger
+                small
+                light
+                onPress={() => this.onTrashPress(p)}
               >
-                <Text>Keep buying</Text>
+                <Icon name="trash" />
               </Button>
-              <Button style={{ margin: 10 }}>
-                <Text>Confirm purchase</Text>
-              </Button>
+            </ListItem>
+          ))}
+          {this.props.cart.length > 0 && (
+            <View>
+              <Text style={{ alignSelf: 'flex-end', margin: 10 }}>
+                Total: ${this.props.cart.reduce(
+                  (sum, p) => sum + p.price * p.quantity,
+                  0,
+                )}
+              </Text>
+              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                <Button
+                  style={{ margin: 10 }}
+                  onPress={() => this.props.navigation.navigate('Home')}
+                >
+                  <Text>Keep buying</Text>
+                </Button>
+                <Button style={{ margin: 10 }}>
+                  <Text>Confirm purchase</Text>
+                </Button>
+              </View>
             </View>
-          </View>
-        )}
-        {this.props.cart.length == 0 && (
-          <Text style={{ alignSelf: 'center', margin: 30 }}>
-            There are no producs in the cart
-          </Text>
-        )}
-      </ScrollView>
+          )}
+          {this.props.cart.length == 0 && (
+            <Text style={{ alignSelf: 'center', margin: 30 }}>
+              There are no producs in the cart
+            </Text>
+          )}
+        </ScrollView>
+      </View>
     );
   }
 }

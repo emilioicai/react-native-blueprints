@@ -20,10 +20,14 @@ export default function reducer(state = initialState, action = {}) {
     case FETCH:
       return { ...state, loading: true };
     case FETCH_SUCCESS:
-      return { ...state, products: action.payload.products, loading: false };
+      return {
+        ...state,
+        products: action.payload.products,
+        loading: false,
+        error: null,
+      };
     case FETCH_ERROR:
       return { ...state, error: action.payload.error, loading: false };
-
     case ADD_TO_CART:
       product = state.cart.find(p => p.id === action.payload.product.id);
       if (product) {

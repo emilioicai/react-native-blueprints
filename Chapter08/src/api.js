@@ -36,6 +36,31 @@ export const get = uri =>
     return null;
   });
 
-export const post = () => {};
+export const post = (uri, data) =>
+  new Promise((resolve, reject) => {
+    let response;
+
+    switch (uri) {
+      case '/login':
+        if (data.email === 'test@test.com' && data.password === 'test') {
+          response = {
+            email: 'test@test.com',
+            name: 'Test Testson',
+            userAddress: '123 test street',
+            postCode: '2761XZ',
+            city: 'Testington',
+          };
+        } else {
+          setTimeout(() => reject('Unauthorised'), 1000);
+          return null;
+        }
+        break;
+      default:
+        return null;
+    }
+
+    setTimeout(() => resolve(response), 1000);
+    return null;
+  });
 
 export const put = () => {};

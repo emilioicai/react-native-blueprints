@@ -1,10 +1,13 @@
 import React from 'react';
 import { View } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Icon, Text, Button } from 'native-base';
-import * as ProductActions from '../reducers/products';
+import { Icon, Header, Title, Text } from 'native-base';
+
+import * as UserActions from '../reducers/user';
+import LoginOrRegister from '../components/LoginOrRegister';
 
 class MyProfile extends React.Component {
   static navigationOptions = {
@@ -14,30 +17,40 @@ class MyProfile extends React.Component {
 
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <View style={{ margin: 20 }}>
-          <Button>
-            <Text>Login</Text>
-          </Button>
-        </View>
-        <Text>or</Text>
-        <View style={{ margin: 20 }}>
-          <Button>
-            <Text>Register</Text>
-          </Button>
-        </View>
+      <View
+        style={{
+          flex: 1,
+          alignSelf: 'stretch',
+        }}
+      >
+        <Header>
+          <Title style={{ paddingTop: 10 }}>My Profile</Title>
+        </Header>
+        {!this.props.user && (
+          <LoginOrRegister
+            login={this.props.login}
+            register={this.props.register}
+          />
+        )}
+        {this.props.user && <Text>Hello {this.props.user.name}</Text>}
       </View>
     );
   }
 }
 
+MyProfile.propTypes = {
+  user: PropTypes.any,
+  login: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+};
+
 function mapStateToProps(state) {
   return {
-    user: state.userReducer.user,
+    user: state.userReducer.user || null,
   };
 }
 function mapStateActionsToProps(dispatch) {
-  return bindActionCreators(ProductActions, dispatch);
+  return bindActionCreators(UserActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapStateActionsToProps)(MyProfile);
