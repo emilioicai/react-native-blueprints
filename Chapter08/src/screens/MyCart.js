@@ -29,9 +29,6 @@ class MyCart extends React.Component {
   render() {
     return (
       <View>
-        <Header>
-          <Title style={{ paddingTop: 10 }}>My Cart</Title>
-        </Header>
         <ScrollView>
           {this.props.cart.map((p, i) => (
             <ListItem key={i} style={{ justifyContent: 'space-between' }}>
@@ -43,7 +40,7 @@ class MyCart extends React.Component {
                 icon
                 danger
                 small
-                light
+                transparent
                 onPress={() => this.onTrashPress(p)}
               >
                 <Icon name="trash" />
@@ -65,7 +62,10 @@ class MyCart extends React.Component {
                 >
                   <Text>Keep buying</Text>
                 </Button>
-                <Button style={{ margin: 10 }}>
+                <Button
+                  style={{ margin: 10 }}
+                  onPress={() => this.props.navigation.navigate('Payment')}
+                >
                   <Text>Confirm purchase</Text>
                 </Button>
               </View>
@@ -92,6 +92,9 @@ function mapStateToProps(state) {
   return {
     user: state.userReducer.user,
     cart: state.productsReducer.cart || [],
+    loading: state.userReducer.loading,
+    error: state.userReducer.error,
+    paying: state.paymentsReducer.loading,
   };
 }
 function mapStateActionsToProps(dispatch) {

@@ -9,7 +9,7 @@ import { Platform } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import appReducer from './reducers/app';
+import paymentsReducer from './reducers/payments';
 import productsReducer from './reducers/products';
 import userReducer from './reducers/user';
 
@@ -17,19 +17,25 @@ import ProductList from './screens/ProductList';
 import ProductDetail from './screens/ProductDetail';
 import MyCart from './screens/MyCart';
 import MyProfile from './screens/MyProfile';
+import Payment from './screens/Payment';
 import Sales from './screens/Sales';
 
-const NestedNavigator = StackNavigator({
+const ProductsNavigator = StackNavigator({
   ProductList: { screen: ProductList },
   ProductDetail: { screen: ProductDetail },
+});
+
+const PurchaseNavigator = StackNavigator({
+  MyCart: { screen: MyCart },
+  Payment: { screen: Payment },
 });
 
 let Navigator;
 if (Platform.OS === 'ios') {
   Navigator = TabNavigator(
     {
-      Home: { screen: NestedNavigator },
-      MyCart: { screen: MyCart },
+      Home: { screen: ProductsNavigator },
+      MyCart: { screen: PurchaseNavigator },
       MyProfile: { screen: MyProfile },
       Sales: { screen: Sales },
     },
@@ -43,7 +49,7 @@ if (Platform.OS === 'ios') {
   );
 } else {
   Navigator = DrawerNavigator({
-    Home: { screen: NestedNavigator },
+    Home: { screen: ProductsNavigator },
     MyCart: { screen: MyCart },
     MyProfile: { screen: MyProfile },
     Sales: { screen: Sales },
@@ -51,7 +57,7 @@ if (Platform.OS === 'ios') {
 }
 
 const store = createStore(
-  combineReducers({ appReducer, productsReducer, userReducer }),
+  combineReducers({ paymentsReducer, productsReducer, userReducer }),
   applyMiddleware(thunk),
 );
 

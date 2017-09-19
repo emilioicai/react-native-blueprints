@@ -46,14 +46,17 @@ export const post = (uri, data) =>
           response = {
             email: 'test@test.com',
             name: 'Test Testson',
-            userAddress: '123 test street',
-            postCode: '2761XZ',
+            address: '123 test street',
+            postcode: '2761XZ',
             city: 'Testington',
           };
         } else {
           setTimeout(() => reject('Unauthorised'), 1000);
           return null;
         }
+        break;
+      case '/register':
+        response = data;
         break;
       default:
         return null;

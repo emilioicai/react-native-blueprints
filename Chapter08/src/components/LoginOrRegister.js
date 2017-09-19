@@ -2,7 +2,6 @@ import React from 'react';
 import { View } from 'react-native';
 
 import PropTypes from 'prop-types';
-import { Text, Button } from 'native-base';
 
 import Login from './Login';
 import Register from './Register';
@@ -25,12 +24,16 @@ export default class LoginOrRegister extends React.Component {
           <Login
             login={this.props.login}
             changeToRegister={() => this.setState({ display: 'register' })}
+            loading={this.props.loading}
+            error={this.props.error}
           />
         )}
         {this.state.display === 'register' && (
           <Register
             register={this.props.register}
             changeToLogin={() => this.setState({ display: 'login' })}
+            loading={this.props.loading}
+            error={this.props.error}
           />
         )}
       </View>
@@ -39,6 +42,8 @@ export default class LoginOrRegister extends React.Component {
 }
 
 LoginOrRegister.propTypes = {
+  error: PropTypes.string,
   login: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
 };
