@@ -34,7 +34,7 @@ export function pay(user, cart, card) {
   return dispatch => {
     dispatch({ type: PAY });
     post('/pay', { user, cart, card })
-      .then(products => dispatch({ type: PAY_SUCCESS, payload: { products } }))
+      .then(() => dispatch({ type: PAY_SUCCESS }))
       .catch(error => dispatch({ type: PAY_ERROR, payload: { error } }));
   };
 }

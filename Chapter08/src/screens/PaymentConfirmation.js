@@ -4,12 +4,12 @@ import { View } from 'react-native';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Icon } from 'native-base';
-import * as Actions from '../actions';
+import * as UserActions from '../reducers/user';
 
 class PaymentConfirmation extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Home',
-    tabBarIcon: () => <Icon name="home" />,
+    drawerLabel: 'MyCart',
+    tabBarIcon: () => <Icon name="cart" />,
   };
 
   render() {
@@ -23,7 +23,7 @@ function mapStateToProps(state) {
   };
 }
 function mapStateActionsToProps(dispatch) {
-  return bindActionCreators(Actions, dispatch);
+  return bindActionCreators(UserActions, dispatch);
 }
 
 export default connect(mapStateToProps, mapStateActionsToProps)(

@@ -18,6 +18,7 @@ import ProductDetail from './screens/ProductDetail';
 import MyCart from './screens/MyCart';
 import MyProfile from './screens/MyProfile';
 import Payment from './screens/Payment';
+import PaymentConfirmation from './screens/PaymentConfirmation';
 import Sales from './screens/Sales';
 
 const ProductsNavigator = StackNavigator({
@@ -28,6 +29,7 @@ const ProductsNavigator = StackNavigator({
 const PurchaseNavigator = StackNavigator({
   MyCart: { screen: MyCart },
   Payment: { screen: Payment },
+  PaymentConfirmation: { screen: PaymentConfirmation },
 });
 
 let Navigator;
