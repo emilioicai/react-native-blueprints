@@ -10,7 +10,6 @@ import {
   Card,
   CardItem,
   Left,
-  Thumbnail,
   Body,
   Text,
   Button,
