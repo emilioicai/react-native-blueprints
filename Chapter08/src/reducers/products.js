@@ -6,6 +6,7 @@ const FETCH_SUCCESS = 'products/FETCH_SUCCESS';
 const FETCH_ERROR = 'products/FETCH_ERROR';
 const ADD_TO_CART = 'products/ADD_TO_CART';
 const REMOVE_FROM_CART = 'products/REMOVE_FROM_CART';
+const RESET_CART = 'products/RESET_CART';
 
 // Reducer
 const initialState = {
@@ -54,6 +55,11 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         cart: state.cart.slice(),
       };
+    case RESET_CART:
+      return {
+        ...state,
+        cart: [],
+      };
     default:
       return state;
   }
@@ -77,4 +83,8 @@ export function fetchProducts() {
       )
       .catch(error => dispatch({ type: FETCH_ERROR, payload: { error } }));
   };
+}
+
+export function resetCart() {
+  return { type: RESET_CART };
 }

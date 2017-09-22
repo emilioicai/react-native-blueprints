@@ -73,7 +73,7 @@ class MyCart extends React.Component {
           )}
           {this.props.cart.length == 0 && (
             <Text style={{ alignSelf: 'center', margin: 30 }}>
-              There are no producs in the cart
+              There are no products in the cart
             </Text>
           )}
         </ScrollView>

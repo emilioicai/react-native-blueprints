@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { CreditCardInput } from 'react-native-credit-card-input';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Icon, Button, Text, Spinner } from 'native-base';
+import { Icon, Button, Text, Spinner, Title } from 'native-base';
 import PropTypes from 'prop-types';
 import * as PaymentsActions from '../reducers/payments';
 import * as UserActions from '../reducers/user';
@@ -15,7 +15,10 @@ class Payment extends React.Component {
     drawerLabel: 'MyCart',
     tabBarIcon: () => <Icon name="cart" />,
   };
-  state = { validCardDetails: false, cardDetails: null };
+  state = {
+    validCardDetails: false,
+    cardDetails: null,
+  };
   onCardInputChange(creditCardForm) {
     this.setState({
       validCardDetails: creditCardForm.valid,
@@ -30,6 +33,7 @@ class Payment extends React.Component {
   }
 
   render() {
+    console.log(this.props.paymentConfirmed, this.props.user);
     return (
       <View
         style={{
@@ -38,7 +42,8 @@ class Payment extends React.Component {
           paddingTop: 10,
         }}
       >
-        {!this.props.user && (
+        {this.props.cart.length > 0 &&
+        !this.props.user && (
           <LoginOrRegister
             login={this.props.login}
             register={this.props.register}
@@ -47,8 +52,16 @@ class Payment extends React.Component {
             error={this.props.error}
           />
         )}
-        {this.props.user && (
+        {this.props.cart.length > 0 &&
+        this.props.user && (
           <View>
+            <Title style={{ margin: 10 }}>
+              Paying: $
+              {this.props.cart.reduce(
+                (sum, p) => sum + p.price * p.quantity,
+                0,
+              )}
+            </Title>
             <CreditCardInput onChange={this.onCardInputChange.bind(this)} />
             <Button
               block
@@ -66,7 +79,8 @@ class Payment extends React.Component {
             {this.props.paying && <Spinner />}
           </View>
         )}
-        {this.props.error && (
+        {this.props.cart.length > 0 &&
+        this.props.error && (
           <Text
             style={{
               alignSelf: 'center',
@@ -76,6 +90,11 @@ class Payment extends React.Component {
             }}
           >
             {this.props.error}
+          </Text>
+        )}
+        {this.props.cart.length === 0 && (
+          <Text style={{ alignSelf: 'center', margin: 30 }}>
+            There are no products in the cart
           </Text>
         )}
       </View>

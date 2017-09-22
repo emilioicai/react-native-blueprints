@@ -60,7 +60,6 @@ ProductList.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    user: state.userReducer.user,
     products: state.productsReducer.products || [],
     loading: state.productsReducer.loading,
   };
