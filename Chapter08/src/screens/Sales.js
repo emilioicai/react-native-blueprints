@@ -20,7 +20,7 @@ import * as ProductActions from '../reducers/products';
 
 class Sales extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Home',
+    drawerLabel: 'Sales',
     tabBarIcon: () => <Icon name="home" />,
   };
 

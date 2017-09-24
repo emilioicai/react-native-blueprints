@@ -33,7 +33,6 @@ class Payment extends React.Component {
   }
 
   render() {
-    console.log(this.props.paymentConfirmed, this.props.user);
     return (
       <View
         style={{

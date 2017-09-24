@@ -18,7 +18,7 @@ import * as ProductActions from '../reducers/products';
 
 class MyCart extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Home',
+    drawerLabel: 'My Cart',
     tabBarIcon: () => <Icon name="cart" />,
   };
 
